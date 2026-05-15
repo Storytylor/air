@@ -1,27 +1,23 @@
 import pandas as pd
 import numpy as np
 
-data = {
-    'Age': [25, 30, np.nan, 35, 40],
-    'Salary': [50000, np.nan, 60000, 65000, np.nan],
-    'Marks': [80, 85, 90, np.nan, 95]
-}
+df = pd.read_csv("iris.csv")
 
-df = pd.DataFrame(data)
+# Add sample missing values
+df.loc[2, 'SepalLength'] = np.nan
+df.loc[5, 'PetalLength'] = np.nan
 
-print("Original Dataset:")
-print(df)
+print("Original Data:")
+print(df.head(10))
 
-print("\nAfter Dropping Rows:")
+# Drop rows
+print("\nDrop rows:")
 print(df.dropna())
 
-print("\nAfter Dropping Columns:")
-print(df.dropna(axis=1))
+# Mean imputation
+df_mean = df.copy()
+df_mean['SepalLength'] = df_mean['SepalLength'].fillna(df_mean['SepalLength'].mean())
+df_mean['PetalLength'] = df_mean['PetalLength'].fillna(df_mean['PetalLength'].mean())
 
-df_mean = df.fillna(df.mean(numeric_only=True))
-print("\nAfter Mean Imputation:")
-print(df_mean)
-
-df_median = df.fillna(df.median(numeric_only=True))
-print("\nAfter Median Imputation:")
-print(df_median)
+print("\nMean Imputation:")
+print(df_mean.head(10))
