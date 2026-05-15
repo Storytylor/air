@@ -4,14 +4,14 @@ import matplotlib.pyplot as plt
 from scipy.stats import boxcox
 
 # Load dataset
-df = pd.read_csv("iris.csv")
+df = pd.read_csv("/content/Iris.csv")
 
 # Select numeric feature
-col = 'SepalLength'
+col = 'SepalLengthCm'
 
 # Calculate skewness
 print("Skewness:")
-print(df[['SepalLength','SepalWidth','PetalLength','PetalWidth']].skew())
+print(df[['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']].skew())
 
 # Original plot
 plt.figure(figsize=(7,5))
